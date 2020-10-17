@@ -17,6 +17,7 @@ import models.validators.EmployeeValidator;
 import utils.DBUtil;
 import utils.EncryptUtil;
 
+
 /**
  * Servlet implementation class EmployeesUpdateServlet
  */
@@ -47,7 +48,7 @@ public class EmployeesUpdateServlet extends HttpServlet {
                 code_duplicate_check = false;
             } else {
                 e.setCode(request.getParameter("code"));
-
+            }
 
             Boolean password_check_flag = true;
             String password = request.getParameter("password");
@@ -89,5 +90,5 @@ public class EmployeesUpdateServlet extends HttpServlet {
             }
         }
     }
-}
+
 }
