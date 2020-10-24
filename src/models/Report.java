@@ -55,9 +55,9 @@ public class Report {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Lob
-    @Column(name = "comment", nullable = false)
-    private String comment;
+//    @Lob
+//    @Column(name = "comment", nullable = false)
+//    private String comment;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -105,13 +105,13 @@ public class Report {
         this.content = content;
     }
 
-    public String getComment(){
-        return comment;
-    }
-
-    public void setComment(String comment){
-        this.comment = comment;
-    }
+//    public String getComment(){
+//        return comment;
+//    }
+//
+//    public void setComment(String comment){
+//        this.comment = comment;
+//    }
 
     public Timestamp getCreated_at() {
         return created_at;
