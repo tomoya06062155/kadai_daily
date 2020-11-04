@@ -35,14 +35,14 @@ public class CommentNewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    EntityManager em = DBUtil.createEntityManager();
-//
-//
+
+
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
         Comment c = new Comment();
-//
+
         em.close();
 
-  //      Report r = new Report();
+
 
         c.setComment_date(new Date (System.currentTimeMillis()));
         request.setAttribute("comment", c);

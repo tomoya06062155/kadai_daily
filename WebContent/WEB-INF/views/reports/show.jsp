@@ -57,18 +57,18 @@
 		                    <th class="comment_content">内容</th>
 		                </tr>
           <c:forEach var="comment" items="${comment}" >
-       <c:choose>
-       <c:when test="${comment.report == report}">
+             <c:choose>
+                <c:when test="${comment.report == report}">
 		                    <tr>
 		                        <td class="comment_name"><c:out value="${comment.employee.name}" /></td>
 		                        <td class="comment_date"><fmt:formatDate value='${comment.comment_date}' pattern='yyyy-MM-dd' /></td>
 		                        <td class="comment_content"><c:out value="${comment.content}" /></td>
 		                    </tr>
 
-         </c:when>
+                 </c:when>
                <c:otherwise>
                </c:otherwise>
-      </c:choose>
+             </c:choose>
             </c:forEach>
            </tbody>
          </table>
