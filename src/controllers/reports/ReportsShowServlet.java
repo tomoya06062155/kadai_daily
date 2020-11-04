@@ -1,6 +1,7 @@
 package controllers.reports;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Comment;
 import models.Report;
 import utils.DBUtil;
 
@@ -33,13 +35,16 @@ public class ReportsShowServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
-
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        List<Comment> comment = em.createNamedQuery("getAllComments_ascending_order", Comment.class)
+                                   .getResultList();
 
         em.close();
 
         request.setAttribute("report", r);
-        request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("comment", comment);
+        request.getSession().setAttribute("report_id", r.getId());
+
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
         rd.forward(request, response);

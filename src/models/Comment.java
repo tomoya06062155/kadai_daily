@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -15,23 +16,24 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
-
-
-
 @Entity
-@Table(name = "comment")
     @NamedQueries({
         @NamedQuery(
-                name = "getAllComment",
+                name = "getAllComments_descending_order",
                 query = "SELECT c FROM Comment AS c ORDER BY c.id DESC"
                 ),
         @NamedQuery(
-                name = "getCommentCount",
-                query = "SELECT COUNT(c) FROM Comment AS c"
+                name = "getAllComments_ascending_order",
+                query = "SELECT c FROM Comment AS c ORDER BY c.id ASC"
                 ),
+        @NamedQuery(
+                name = "getCommentsCount",
+                query = "SELECT COUNT(c) FROM Comment AS c"
+                )
+
     })
 
-
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -39,13 +41,16 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "report_id")
-    private Report report_id;
+    @Column(name = "comment_date")
+    private Date comment_date;
 
     @ManyToOne
-    @JoinColumn(name = "Employee_id")
-    private Employee employee_id;
+    @JoinColumn(name = "report_id", nullable = false)
+    private Report report;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
     @Lob
     @Column(name = "Content")
@@ -67,19 +72,26 @@ public class Comment {
     }
 
 
-    public Report getReport_id(){
-        return report_id;
+    public Report getReport(){
+        return report;
     }
-    public void setReport_id(Report report_id){
-        this.report_id = report_id;
+    public void setReport(Report report){
+        this.report = report;
+    }
+
+    public Date getComment_date(){
+        return comment_date;
+    }
+    public void setComment_date(Date comment_date){
+        this.comment_date = comment_date;
     }
 
 
-    public Employee getEmployee_id(){
-        return employee_id;
+    public Employee getEmployee(){
+        return employee;
     }
-    public void setEmployee_id(Employee employee_id){
-        this.employee_id = employee_id;
+    public void setEmployee(Employee employee){
+        this.employee = employee;
     }
 
 
@@ -90,14 +102,12 @@ public class Comment {
         this.content = content;
     }
 
-
     public Timestamp getCreated_at(){
         return created_at;
     }
-    public void setCreated_at(Timestamp created_at){
-        this.created_at = created_at;
+    public void setCreated_at(Timestamp Created_at){
+        this.created_at = Created_at;
     }
-
 
 
 }
