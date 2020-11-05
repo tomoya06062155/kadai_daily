@@ -54,28 +54,18 @@ public class CommentCreateServlet extends HttpServlet {
     		        comment_date = Date.valueOf(request.getParameter("comment_date"));
     		    }c.setComment_date(comment_date);
 
-
-
 //    		    Reportフィールドにreport_idをいれる
     		    c.setReport((Report)(r));
-
-
 
 //    		    Employeeフィールドにlogin_employeeをいれる
     		    c.setEmployee((Employee)request.getSession().getAttribute("login_employee"));
 
-
-
     		    String content = request.getParameter("content");
     		    c.setContent(content);
-
-
 
     		    //現在日時の情報を日付型のオブジェクトで取得
                 Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                 c.setCreated_at(currentTime);
-
-
 
                 List<String> errors = CommentValidator.validate(c);
                 if(errors.size()>0){
@@ -95,9 +85,6 @@ public class CommentCreateServlet extends HttpServlet {
                     em.close();
 
                     request.getSession().removeAttribute("report_id");
-
-
-
                     response.sendRedirect(request.getContextPath() + "/reports/index");
 
             }
